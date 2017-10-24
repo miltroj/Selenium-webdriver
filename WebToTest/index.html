@@ -1,0 +1,83 @@
+<!doctype html>
+<html xmlns:ng="http://angularjs.org/" xmlns:my="http://rx.org">
+<head>
+  <meta charset="utf-8">
+  <title>Test Site</title>
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+      <div ng:controller="App.Controllers.TodoController" id="todoapp">
+        <div class="title">
+            <h1>
+                List to add
+            </h1>
+        </div>
+        <div class="content">
+            <div id="todo-form">
+            </div>
+            <form id="todo-form" ng:submit="addTodo()">
+                <input id="new-todo" name="newTodo" my:blur="addTodo()" placeholder="What do U want to add?" type="text">
+                <span class="ui-tooltip-top" ng:show="showHitEnterHint">
+                    Remember to press enter!
+                </span>
+            </form>
+            <div id="todos">
+                <ul id="todo-list">
+                  <li class="todo" ng:class="'editing-' + todo.editing + ' done-' + todo.done" ng:repeat="todo in todos">
+                    <div class="display">
+                      <input ng:change="changeStatus(todo)" class="check" type="checkbox" name="todo.done" / >
+                      <div ng:click="editTodo(todo)" class="todo-content"> {{ todo.content }} </div>
+                      <span class="todo-destroy" ng:click="removeTodo(todo)"></span>
+                   </div>
+                  <div class="edit">
+                    <form ng:submit="finishEditing(todo)">
+                        <input class="todo-input" my:focus="todo.editing" my:blur="finishEditing(todo)" name="todo.content" type="text">
+                    </form>
+                  </div>
+                  </li>
+                </ul>
+            </div>
+            <div id="todo-stats">
+              <span class="todo-count" ng:show="hasTodos()">
+                <ng:pluralize count="remainingTodos()" when="{'0' : '0 items', '1': '1 item', 'other' : '{} item to count' }">
+                </ng:pluralize>
+              </span>
+              <span class="todo-clear" ng:show="hasFinishedTodos()">
+                  <a ng:click="clearCompletedItems()">
+                  	Clear <ng:pluralize count="finishedTodos()" when="{'1': '1 added', 'other' : '{} added item' }">
+                  	</ng:pluralize>
+                  </a>
+              </span>
+        </div>
+        </div>
+    </div>
+    <ul id="">
+
+    </ul>
+    <div id="">
+        <p>
+
+        </p>
+        <p>
+
+        </p>
+		<p>
+
+		</p>
+        <p>
+              <br/>
+            <a href=""> </a><br/>
+        </p>
+    </div>
+  <script src="js/booter.js"></script>
+  <script src="lib/angular/angular.min.js" ng:autobind></script>
+  <script src="lib/rx/rx.js"></script>
+  <script src="lib/rx/rx.angular.js"></script>
+  <script src="lib/persistence/persistence.js"></script>
+  <script src="lib/persistence/persistence.store.sql.js"></script>
+  <script src="lib/persistence/persistence.store.websql.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/directive.js"></script>  
+  <script src="js/services.js"></script>
+</body>
+</html>
